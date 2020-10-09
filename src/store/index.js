@@ -130,17 +130,28 @@ export default new Vuex.Store({
       }
     ]
   },
-  mutations: {},
+  mutations: {
+    addPayment(state, payload) {
+      const { idTable } = payload;
+      const tableIndex = state.tableInfo.findIndex(
+        table => table.id === idTable
+      );
+      if (tableIndex !== -1) state.tableInfo[tableIndex].payments.push(payload);
+    }
+  },
   actions: {
     getTables() {
       return this.state.tables;
     },
     getTableInfo(context, payload) {
-      //under normal circustances this would be a call for the API, but since the data is mocked on state I will just find the right table
       const table = this.state.tableInfo.find(table => table.id === payload.id);
       if (table === undefined)
         return Promise.reject(new Error("Mesa não encontrada"));
       return Promise.resolve(table);
+    },
+    createPayment({ commit }, payload) {
+      commit("addPayment", payload);
+      return payload;
     }
   },
   modules: {}

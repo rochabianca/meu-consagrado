@@ -20,7 +20,7 @@
       </div>
       <div class="table__total">Total: {{ total }}</div>
     </div>
-    <pay-bill v-if="showPayBill" />
+    <pay-bill @new-payment="addNewPayment" v-if="showPayBill" />
     <div v-if="error">
       {{ error }}
     </div>
@@ -39,7 +39,7 @@ export default {
     return {
       table: null,
       error: null,
-      showPayBill: false
+      showPayBill: true
     };
   },
   created() {
@@ -56,6 +56,9 @@ export default {
         .catch(e => {
           this.error = e.message;
         });
+    },
+    addNewPayment(payment) {
+      this.table.payments.push(payment);
     }
   },
   computed: {

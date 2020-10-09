@@ -1,10 +1,29 @@
 <template>
-  <div>PayBill</div>
+  <div></div>
 </template>
 
 <script>
 export default {
-  name: "PayBill"
+  name: "PayBill",
+  data() {
+    return {
+      payload: {
+        id: 2,
+        created_at: Date.now(),
+        paid: 10
+      }
+    };
+  },
+  created() {
+    this.createPayment();
+  },
+  methods: {
+    createPayment() {
+      this.$store.dispatch("createPayment", this.payload).then(res => {
+        this.$emit("new-payment", res);
+      });
+    }
+  }
 };
 </script>
 

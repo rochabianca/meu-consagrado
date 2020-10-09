@@ -137,7 +137,10 @@ export default new Vuex.Store({
     },
     getTableInfo(context, payload) {
       //under normal circustances this would be a call for the API, but since the data is mocked on state I will just find the right table
-      return this.state.tableInfo.find(table => table.id === payload.id);
+      const table = this.state.tableInfo.find(table => table.id === payload.id);
+      if (table === undefined)
+        return Promise.reject(new Error("Mesa não encontrada"));
+      return Promise.resolve(table);
     }
   },
   modules: {}

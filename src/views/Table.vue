@@ -11,20 +11,35 @@
       </div>
       <div v-if="table.payments.length > 0" class="table__payments">
         <h3>Pagamentos</h3>
-        {{ table.payments }}
+        <button @click="showPayBill = true" class="table__payments__button">
+          Registrar Pagamento
+        </button>
+        <div>
+          {{ table.payments }}
+        </div>
       </div>
-
       <div class="table__total">Total: {{ total }}</div>
+    </div>
+    <pay-bill v-if="showPayBill" />
+    <div v-if="error">
+      {{ error }}
     </div>
   </div>
 </template>
 
 <script>
+import PayBill from "@/components/PayBill.vue";
+
 export default {
   name: "Table",
+  components: {
+    PayBill
+  },
   data() {
     return {
-      table: null
+      table: null,
+      error: null,
+      showPayBill: false
     };
   },
   created() {
@@ -33,25 +48,38 @@ export default {
   },
   methods: {
     getTableInfo(id) {
-      this.$store.dispatch("getTableInfo", { id: Number(id) }).then(data => {
-        this.table = data;
-        console.log(this.table.orders);
-      });
+      this.$store
+        .dispatch("getTableInfo", { id: Number(id) })
+        .then(data => {
+          this.table = data;
+        })
+        .catch(e => {
+          this.error = e.message;
+        });
     }
   },
   computed: {
+    totalPaid() {
+      if (
+        !this.table ||
+        !this.table.payments ||
+        this.table.payments.length === 0
+      )
+        return 0;
+      return this.table.payments
+        .map(pay => pay.paid)
+        .reduce((total, paid) => {
+          return total + paid;
+        });
+    },
     total() {
+      if (!this.table || !this.table.orders) return 0;
       const totalOrders = this.table.orders
         .map(order => order.price * order.qtd)
         .reduce((total, order) => {
           return total + order;
         });
-      const totalPaid = this.table.payments
-        .map(pay => pay.paid)
-        .reduce((total, paid) => {
-          return total + paid;
-        });
-      return (totalOrders - totalPaid).toFixed(2);
+      return (totalOrders - this.totalPaid).toFixed(2);
     }
   }
 };

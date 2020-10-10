@@ -3,11 +3,12 @@
     <img :src="require('@/assets/images/logo.png')" class="navbar__logo" />
     <nav class="navbar__nav">
       <ul class="navbar__list">
-        <li class="navbar__item">
-          <router-link to="/">Home</router-link>
-        </li>
-        <li class="navbar__item">
-          <router-link to="/about">Sobre</router-link>
+        <li
+          v-for="({ value, label }, index) in links"
+          :key="index"
+          class="navbar__item"
+        >
+          <router-link :to="value">{{ label }}</router-link>
         </li>
       </ul>
     </nav>
@@ -16,7 +17,21 @@
 
 <script>
 export default {
-  name: "Navbar"
+  name: "Navbar",
+  computed: {
+    links() {
+      return [
+        {
+          value: "/",
+          label: "Home"
+        },
+        {
+          value: "/about",
+          label: "Sobre"
+        }
+      ];
+    }
+  }
 };
 </script>
 

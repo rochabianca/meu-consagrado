@@ -70,7 +70,7 @@ export default {
       )
         return 0;
       return this.table.payments
-        .map(pay => pay.paid)
+        .map(pay => Number(pay.paid))
         .reduce((total, paid) => {
           return total + paid;
         });

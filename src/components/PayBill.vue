@@ -1,5 +1,12 @@
 <template>
-  <div></div>
+  <form v-on:submit.prevent>
+    <label for="value">Valor pago</label>
+    <input v-model="paymentData.paid" type="number" />
+    <button @click="createPayment">Pagar</button>
+    <div v-if="error">
+      {{ error }}
+    </div>
+  </form>
 </template>
 
 <script>
@@ -7,21 +14,25 @@ export default {
   name: "PayBill",
   data() {
     return {
-      payload: {
-        id: 2,
-        created_at: Date.now(),
-        paid: 10
-      }
+      paymentData: {
+        id: this.$route.params.id,
+        created_at: null,
+        paid: null
+      },
+      error: null
     };
-  },
-  created() {
-    this.createPayment();
   },
   methods: {
     createPayment() {
-      this.$store.dispatch("createPayment", this.payload).then(res => {
-        this.$emit("new-payment", res);
-      });
+      if (!this.paymentData.paid) {
+        this.error = "Você precisa inserir a quantidade paga!";
+      } else {
+        this.paymentData.created_at = Date.now();
+        this.paymentData.paid = Number(this.paymentData.paid).toFixed(2);
+        this.$store.dispatch("createPayment", this.paymentData).then(res => {
+          this.$emit("new-payment", res);
+        });
+      }
     }
   }
 };

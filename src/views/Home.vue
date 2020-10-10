@@ -1,20 +1,21 @@
 <template>
   <div class="home">
-    Mesas Disponíveis
-    <router-link
-      class="tables__container"
+    <h1 class="home__title">Mesas Disponíveis</h1>
+    <table-item
       v-for="table in filteredTables"
       :key="table.id"
-      :to="`/table/${table.id}`"
-    >
-      {{ table.id }}
-    </router-link>
+      :table="table"
+    />
   </div>
 </template>
 
 <script>
+import TableItem from "@/components/TableItem.vue";
 export default {
   name: "Home",
+  components: {
+    TableItem
+  },
   data() {
     return {
       tables: []

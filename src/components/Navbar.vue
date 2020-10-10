@@ -44,6 +44,9 @@ export default {
   align-items: center;
   .navbar__logo {
     width: 180px;
+    @media (max-width: 768px) {
+      width: 150px;
+    }
   }
   .navbar__nav {
     .navbar__list {
@@ -52,9 +55,13 @@ export default {
       .navbar__item a {
         color: $white;
         transition: all ease 0.3s;
+        font-size: 18px;
         &:hover,
         &.router-link-exact-active {
           color: $dark-blue;
+        }
+        @media (max-width: 768px) {
+          font-size: 16px;
         }
       }
       .navbar__item + .navbar__item {

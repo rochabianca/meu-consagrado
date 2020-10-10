@@ -36,5 +36,8 @@ body {
 }
 .container {
   padding: 32px;
+  @media (max-width: 768px) {
+    padding: 16px;
+  }
 }
 </style>

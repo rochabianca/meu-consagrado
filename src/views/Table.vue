@@ -39,7 +39,7 @@ export default {
     return {
       table: null,
       error: null,
-      showPayBill: true
+      showPayBill: false
     };
   },
   created() {

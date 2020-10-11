@@ -1,6 +1,8 @@
 <template>
   <div class="navbar">
-    <img :src="require('@/assets/images/logo.png')" class="navbar__logo" />
+    <router-link to="/">
+      <img :src="require('@/assets/images/logo.png')" class="navbar__logo" />
+    </router-link>
     <nav class="navbar__nav">
       <ul class="navbar__list">
         <li

@@ -10,10 +10,17 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   name: "TableItem",
   props: {
     table: Object
+  },
+  computed: {
+    ...mapGetters({
+      isMobile: "device/isMobile"
+    })
   }
 };
 </script>
@@ -22,16 +29,21 @@ export default {
 .table-item {
   display: block;
   padding: 16px;
-  max-width: 180px;
+  max-width: 150px;
   border: 1px solid $gray;
   border-radius: 10px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  @media (max-width: 767px) {
+    max-width: 100%;
+    justify-content: space-between;
+  }
   .table-tem__arrow {
     display: none;
     @media (max-width: 768px) {
       width: 8px;
+      display: block;
     }
   }
   .table-item__title {
@@ -40,6 +52,10 @@ export default {
   }
 }
 .table-item + .table-item {
-  margin-top: 16px;
+  margin-left: 16px;
+  @media (max-width: 768px) {
+    margin-left: 0px;
+    margin-top: 16px;
+  }
 }
 </style>

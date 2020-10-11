@@ -1,11 +1,13 @@
 <template>
   <div class="home">
     <h1 class="home__title">Mesas Disponíveis</h1>
-    <table-item
-      v-for="table in filteredTables"
-      :key="table.id"
-      :table="table"
-    />
+    <div class="home__container">
+      <table-item
+        v-for="table in filteredTables"
+        :key="table.id"
+        :table="table"
+      />
+    </div>
   </div>
 </template>
 
@@ -36,3 +38,23 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.home {
+  .home__title {
+    font-size: 24px;
+    color: $dark-blue;
+    margin-top: 0px;
+    margin-bottom: 24px;
+    font-weight: lighter;
+  }
+  .home__container {
+    display: flex;
+    align-items: center;
+    @media (max-width: 767px) {
+      flex-direction: column;
+      align-self: stretch;
+    }
+  }
+}
+</style>

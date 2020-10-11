@@ -1,29 +1,58 @@
 <template>
-  <div>
-    <div v-if="table" class="table">
+  <div class="table">
+    <div v-if="table">
       <h2 class="table__title">Mesa {{ table.id }}</h2>
       <p class="table__available" v-if="table.orders.length === 0">
         Essa mesa está disponível
       </p>
       <div class="table__orders" v-else>
-        <h3>Pedidos</h3>
-        {{ table.orders }}
+        <h3 class="table__title table__title--subtitle">Pedidos</h3>
+        <table class="table__table">
+          <thead>
+            <th>Produto</th>
+            <th class="table__table__align-center">Quantidade</th>
+            <th class="table__table__align-right">Preço</th>
+          </thead>
+          <tbody>
+            <tr v-for="order in table.orders" :key="order.product">
+              <td>{{ order.product }}</td>
+              <td class="table__table__align-center">{{ order.qtd }}</td>
+              <td class="table__table__align-right">
+                {{ order.price | price }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
       <div v-if="table.payments.length > 0" class="table__payments">
-        <h3>Pagamentos</h3>
-        <button @click="showPayBill = true" class="table__payments__button">
-          Registrar Pagamento
-        </button>
+        <h3 class="table__title table__title--subtitle">Pagamentos</h3>
         <div>
-          {{ table.payments }}
+          <table class="table__table">
+            <thead>
+              <th>Hora</th>
+              <th class="table__table__align-right">Valor Pago</th>
+            </thead>
+            <tbody>
+              <tr v-for="payment in table.payments" :key="payment.created_at">
+                <td>{{ payment.created_at | date }}</td>
+                <td class="table__table__align-right">
+                  {{ payment.paid | price }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
-      <div class="table__total">Total: {{ total }}</div>
+      <div class="table__total">Total: {{ total | price }}</div>
     </div>
-    <pay-bill @new-payment="addNewPayment" v-if="showPayBill" />
     <div v-if="error">
       {{ error }}
     </div>
+    <div @click="showPayBill = true" class="table__total--mobile">
+      <span>Adicionar Pagamento</span>
+      <div class="table__total--mobile__price">{{ total | price }}</div>
+    </div>
+    <pay-bill @new-payment="addNewPayment" v-if="showPayBill" />
   </div>
 </template>
 
@@ -88,4 +117,73 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.table {
+  position: relative;
+  .table__title {
+    font-size: 24px;
+    margin-top: 0px;
+    margin-bottom: 24px;
+    color: $dark-blue;
+    &.table__title--subtitle {
+      font-size: 18px;
+      margin-bottom: 16px;
+      font-weight: bold;
+    }
+  }
+  .table__table {
+    margin: 0px;
+    width: 100%;
+    border-collapse: collapse;
+    color: $dark-blue;
+    thead,
+    tbody {
+      text-align: left;
+    }
+    th,
+    td {
+      padding: 16px 8px;
+      vertical-align: middle;
+      border-bottom: 1px solid $gray;
+    }
+    thead {
+      th {
+        border-bottom: 1px solid $dark-blue;
+      }
+    }
+    .table__table__align-center {
+      text-align: center;
+    }
+    .table__table__align-right {
+      text-align: right;
+    }
+  }
+  .table__payments {
+    margin-top: 32px;
+  }
+  .table__total {
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+  .table__total--mobile {
+    @media (min-width: 769px) {
+      display: none;
+    }
+    position: fixed;
+    width: calc(100% - 64px);
+    left: 0;
+    right: 0;
+    bottom: 0px;
+    padding: 16px 32px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    background: $dark-blue;
+    color: $white;
+    .table__total--mobile__price {
+      font-weight: bold;
+    }
+  }
+}
+</style>

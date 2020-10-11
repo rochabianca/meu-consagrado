@@ -38,6 +38,7 @@ export default {
   @media (max-width: 767px) {
     max-width: 100%;
     justify-content: space-between;
+    align-self: stretch;
   }
   .table-tem__arrow {
     display: none;

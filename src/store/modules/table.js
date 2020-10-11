@@ -10,34 +10,34 @@ export default {
         id: 2,
         orders: [
           {
-            produtct: "Cappuccino",
+            product: "Cappuccino",
             qtd: 2,
             price: 5.0
           },
           {
-            produtct: "Suco de Laranja",
+            product: "Suco de Laranja",
             qtd: 1,
             price: 9.5
           },
           {
-            produtct: "X-Tudo",
+            product: "X-Tudo",
             qtd: 3,
             price: 19.99
           },
           {
-            produtct: "Batata Frita",
+            product: "Batata Frita",
             qtd: 1,
             price: 10.0
           }
         ],
         payments: [
           {
-            created_at: Date.now(),
-            paid: 10.0
+            created_at: new Date(2020, 10, 10, 23, 59, 0, 0),
+            paid: 20.0
           },
           {
-            created_at: Date.now(),
-            paid: 20.0
+            created_at: new Date(2020, 10, 10, 0, 3, 0, 0),
+            paid: 10.0
           }
         ]
       },
@@ -45,22 +45,22 @@ export default {
         id: 3,
         orders: [
           {
-            produtct: "Cappuccino",
+            product: "Cappuccino",
             qtd: 2,
             price: 5.0
           },
           {
-            produtct: "Suco de Laranja",
+            product: "Suco de Laranja",
             qtd: 1,
             price: 9.5
           },
           {
-            produtct: "X-Tudo",
+            product: "X-Tudo",
             qtd: 3,
             price: 19.99
           },
           {
-            produtct: "Batata Frita",
+            product: "Batata Frita",
             qtd: 1,
             price: 10.0
           }
@@ -71,22 +71,22 @@ export default {
         id: 4,
         orders: [
           {
-            produtct: "Cappuccino",
+            product: "Cappuccino",
             qtd: 2,
             price: 5.0
           },
           {
-            produtct: "Suco de Laranja",
+            product: "Suco de Laranja",
             qtd: 1,
             price: 9.5
           },
           {
-            produtct: "X-Tudo",
+            product: "X-Tudo",
             qtd: 3,
             price: 19.99
           },
           {
-            produtct: "Batata Frita",
+            product: "Batata Frita",
             qtd: 1,
             price: 10.0
           }

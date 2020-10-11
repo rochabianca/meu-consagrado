@@ -22,13 +22,17 @@ export default {
 .table-item {
   display: block;
   padding: 16px;
+  max-width: 180px;
   border: 1px solid $gray;
   border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   .table-tem__arrow {
-    width: 8px;
+    display: none;
+    @media (max-width: 768px) {
+      width: 8px;
+    }
   }
   .table-item__title {
     color: $dark-blue;

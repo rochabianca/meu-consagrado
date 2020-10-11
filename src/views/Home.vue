@@ -26,9 +26,7 @@ export default {
   },
   methods: {
     getTables() {
-      this.$store.dispatch("getTables").then(data => {
-        this.tables = data;
-      });
+      this.tables = this.$store.getters.getTables;
     }
   },
   computed: {

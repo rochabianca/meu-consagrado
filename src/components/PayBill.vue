@@ -1,5 +1,5 @@
 <template>
-  <modal @close="$emit('close')">
+  <modal title="Adicionar Pagamento" @close="$emit('close')">
     <form v-on:submit.prevent>
       <label for="value">Valor pago</label>
       <input v-model="paymentData.paid" type="number" />
@@ -45,8 +45,16 @@ export default {
         this.paymentData.paid = Number(this.paymentData.paid).toFixed(2);
         this.$store.dispatch("createPayment", this.paymentData).then(res => {
           this.$emit("new-payment", res);
+          this.resetPaymentData();
         });
       }
+    },
+    resetPaymentData() {
+      this.paymentData = {
+        id: this.$route.params.id,
+        created_at: null,
+        paid: null
+      };
     }
   }
 };

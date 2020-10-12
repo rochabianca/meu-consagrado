@@ -95,6 +95,7 @@ export default {
     },
     addNewPayment(payment) {
       this.table.payments.push(payment);
+      this.showPayBill = false;
     }
   },
   computed: {
@@ -127,6 +128,7 @@ export default {
 <style lang="scss" scoped>
 .table {
   position: relative;
+  margin-bottom: 86px; // 54px of table__total--mobile and 32px of space
   .table__title {
     font-size: 24px;
     margin-top: 0px;

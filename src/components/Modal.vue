@@ -2,7 +2,7 @@
   <div class="modal">
     <div class="modal__header">
       <h2 class="modal__title">
-        title
+        {{ title }}
       </h2>
       <button @click="$emit('close')" class="modal__close">
         <img :src="require('@/assets/icons/close.svg')" alt="x" />
@@ -21,7 +21,10 @@
 
 <script>
 export default {
-  name: "Modal"
+  name: "Modal",
+  props: {
+    title: String
+  }
 };
 </script>
 

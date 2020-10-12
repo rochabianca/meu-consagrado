@@ -1,7 +1,7 @@
 <template>
   <div class="table">
     <div v-if="table">
-      <h2 class="table__title">Mesa {{ table.id }}</h2>
+      <h2 v-if="!isMobile" class="table__title">Mesa {{ table.id }}</h2>
       <p class="table__available" v-if="table.orders.length === 0">
         Essa mesa está disponível
       </p>
@@ -66,6 +66,7 @@
 
 <script>
 import PayBill from "@/components/PayBill.vue";
+import { mapGetters } from "vuex";
 
 export default {
   name: "Table",
@@ -100,6 +101,9 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      isMobile: "device/isMobile"
+    }),
     totalPaid() {
       if (
         !this.table ||
@@ -137,9 +141,9 @@ export default {
     color: $dark-blue;
     text-transform: uppercase;
     &.table__title--subtitle {
-      font-size: 18px;
+      font-size: 24px;
       margin-bottom: 16px;
-      font-weight: bold;
+      font-weight: lighter;
       text-transform: capitalize;
     }
   }
@@ -172,7 +176,7 @@ export default {
     }
   }
   .table__payments {
-    margin-top: 32px;
+    margin-top: 48px;
   }
   .table__total {
     @media (max-width: 768px) {

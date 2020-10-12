@@ -1,8 +1,17 @@
 <template>
   <div class="navbar">
-    <router-link to="/">
+    <router-link v-if="isMobile && isTablePage" to="/" class="navbar__table">
+      <img
+        class="navbar__go-back"
+        :src="require('@/assets/icons/arrow-left.svg')"
+        alt="Voltar"
+      />
+      <span>{{ routerName }}</span>
+    </router-link>
+    <router-link v-else to="/">
       <img :src="require('@/assets/images/logo.png')" class="navbar__logo" />
     </router-link>
+
     <nav class="navbar__nav">
       <ul class="navbar__list">
         <li
@@ -18,14 +27,37 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   name: "Navbar",
+  data() {
+    return {
+      isTablePage: false
+    };
+  },
+  watch: {
+    $route(to) {
+      if (to.path.includes("/table/")) {
+        this.isTablePage = true;
+      } else {
+        this.isTablePage = false;
+      }
+    }
+  },
   computed: {
+    ...mapGetters({
+      isMobile: "device/isMobile"
+    }),
+    routerName() {
+      const { id } = this.$route.params;
+      return `${this.$router.history.current.name} ${id}`;
+    },
     links() {
       return [
         {
           value: "/",
-          label: "Home"
+          label: "Início"
         },
         {
           value: "/about",
@@ -44,6 +76,20 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  .navbar__table {
+    width: 150px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    .navbar__go-back {
+      display: inline-block;
+      width: 10px;
+      margin-right: 8px;
+    }
+    text-transform: uppercase;
+    font-weight: bold;
+    color: $white;
+  }
   .navbar__logo {
     width: 180px;
     @media (max-width: 768px) {

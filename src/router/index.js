@@ -19,7 +19,7 @@ const routes = [
   },
   {
     path: "/table/:id",
-    name: "Table",
+    name: "Mesa",
     component: Table
   }
 ];

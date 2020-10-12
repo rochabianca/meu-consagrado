@@ -9,9 +9,29 @@
 
 <script>
 import Navbar from "@/components/Navbar.vue";
+// import { mobileAndTabletCheck } from "@/store/helpers.js";
+
 export default {
   components: {
     Navbar
+  },
+  beforeRouteUpdate() {
+    console.log("beforeRouteUpdate");
+  },
+  mounted() {
+    console.log("montou");
+
+    const resources = container => {
+      this.$store.commit("device/calc", {
+        width: container.innerWidth,
+        heigth: container.innerHeight
+      });
+    };
+    resources(window);
+    window.addEventListener("resize", () => {
+      console.log("resized");
+      resources(window);
+    });
   }
 };
 </script>
@@ -39,7 +59,7 @@ body {
 .container {
   padding: 32px;
   @media (max-width: 768px) {
-    padding: 16px;
+    padding: 32px 16px;
   }
 }
 </style>

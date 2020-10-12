@@ -1,17 +1,31 @@
 <template>
-  <form v-on:submit.prevent>
-    <label for="value">Valor pago</label>
-    <input v-model="paymentData.paid" type="number" />
-    <button @click="createPayment">Pagar</button>
-    <div v-if="error">
-      {{ error }}
-    </div>
-  </form>
+  <modal @close="$emit('close')">
+    <form v-on:submit.prevent>
+      <label for="value">Valor pago</label>
+      <input v-model="paymentData.paid" type="number" />
+      <div v-if="error">
+        {{ error }}
+      </div>
+    </form>
+    <template slot="footer">
+      <button @click="$emit('close')" class="button button__link">
+        Cancelar
+      </button>
+      <button class="button button__primary" @click="createPayment">
+        Pagar
+      </button>
+    </template>
+  </modal>
 </template>
 
 <script>
+import Modal from "./Modal";
+
 export default {
   name: "PayBill",
+  components: {
+    Modal
+  },
   data() {
     return {
       paymentData: {
@@ -38,4 +52,21 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.button {
+  background: none;
+  border: none;
+  padding: 8px 16px;
+  min-width: 100px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 18px;
+  &.button__primary {
+    background: $red;
+    color: $white;
+  }
+  &.button__link {
+    color: $dark-blue;
+  }
+}
+</style>

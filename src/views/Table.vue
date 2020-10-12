@@ -33,7 +33,10 @@
               <th class="table__table__align-right">Valor Pago</th>
             </thead>
             <tbody>
-              <tr v-for="payment in table.payments" :key="payment.created_at">
+              <tr
+                v-for="(payment, index) in table.payments"
+                :key="`payments-${index}`"
+              >
                 <td>{{ payment.created_at | date }}</td>
                 <td class="table__table__align-right">
                   {{ payment.paid | price }}
@@ -52,7 +55,11 @@
       <span>Adicionar Pagamento</span>
       <div class="table__total--mobile__price">{{ total | price }}</div>
     </div>
-    <pay-bill @new-payment="addNewPayment" v-if="showPayBill" />
+    <pay-bill
+      @new-payment="addNewPayment"
+      @close="showPayBill = false"
+      v-if="showPayBill"
+    />
   </div>
 </template>
 
@@ -68,7 +75,7 @@ export default {
     return {
       table: null,
       error: null,
-      showPayBill: false
+      showPayBill: true
     };
   },
   created() {
@@ -142,12 +149,13 @@ export default {
     }
     th,
     td {
-      padding: 16px 8px;
+      padding: 16px 0px;
       vertical-align: middle;
       border-bottom: 1px solid $gray;
     }
     thead {
       th {
+        padding: 0px 0px 16px 0px;
         border-bottom: 1px solid $dark-blue;
       }
     }

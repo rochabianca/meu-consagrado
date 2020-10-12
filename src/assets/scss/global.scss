@@ -1,0 +1,77 @@
+.button {
+  background: none;
+  border: none;
+  padding: 8px 16px;
+  min-width: 100px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 18px;
+  transition: all ease 0.3s;
+  &.button__primary {
+    background: $red;
+    color: $white;
+  }
+  &.button__link {
+    color: $dark-blue;
+  }
+  &:disabled {
+    background: $gray;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+    visibility: visible;
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+.animate__slideInUp {
+  -webkit-animation-name: slideInUp;
+  animation-name: slideInUp;
+}
+
+.slideUp-enter-active {
+  animation: slideInUp .3s;
+}
+.slideUp-leave-active {
+  animation: slideInUp .3s reverse;
+}
+
+// slide down animation
+@-webkit-keyframes slideInDown {
+  from {
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+    visibility: visible;
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes slideInDown {
+  from {
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+    visibility: visible;
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.slideDown-enter-active {
+  animation: slideInDown .3s;
+}
+.slideDown-leave-active {
+  animation: slideInDown .3s reverse;
+}

@@ -58,7 +58,8 @@
     <pay-bill
       @new-payment="addNewPayment"
       @close="showPayBill = false"
-      v-if="showPayBill"
+      :total="+total"
+      :show="showPayBill"
     />
   </div>
 </template>
@@ -75,7 +76,7 @@ export default {
     return {
       table: null,
       error: null,
-      showPayBill: true
+      showPayBill: false
     };
   },
   created() {
@@ -134,10 +135,12 @@ export default {
     margin-top: 0px;
     margin-bottom: 24px;
     color: $dark-blue;
+    text-transform: uppercase;
     &.table__title--subtitle {
       font-size: 18px;
       margin-bottom: 16px;
       font-weight: bold;
+      text-transform: capitalize;
     }
   }
   .table__table {

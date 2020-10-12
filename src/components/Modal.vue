@@ -1,22 +1,24 @@
 <template>
-  <div class="modal">
-    <div class="modal__header">
-      <h2 class="modal__title">
-        {{ title }}
-      </h2>
-      <button @click="$emit('close')" class="modal__close">
-        <img :src="require('@/assets/icons/close.svg')" alt="x" />
-      </button>
-    </div>
+  <transition name="slideUp">
+    <div class="modal">
+      <div class="modal__header">
+        <h2 class="modal__title">
+          {{ title }}
+        </h2>
+        <button @click="$emit('close')" class="modal__close">
+          <img :src="require('@/assets/icons/close.svg')" alt="x" />
+        </button>
+      </div>
 
-    <div class="modal__content">
-      <slot></slot>
-    </div>
+      <div class="modal__content">
+        <slot></slot>
+      </div>
 
-    <div class="modal__footer">
-      <slot name="footer"></slot>
+      <div class="modal__footer">
+        <slot name="footer"></slot>
+      </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>

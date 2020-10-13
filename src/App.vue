@@ -28,7 +28,6 @@ export default {
     };
     resources(window);
     window.addEventListener("resize", () => {
-      console.log("resized");
       resources(window);
     });
   }

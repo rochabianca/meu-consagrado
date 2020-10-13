@@ -92,6 +92,58 @@ export default {
           }
         ],
         payments: []
+      },
+      {
+        id: 6,
+        orders: [
+          {
+            product: "Cappuccino",
+            qtd: 2,
+            price: 5.0
+          },
+          {
+            product: "Suco de Laranja",
+            qtd: 1,
+            price: 9.5
+          },
+          {
+            product: "X-Tudo",
+            qtd: 3,
+            price: 19.99
+          },
+          {
+            product: "Batata Frita",
+            qtd: 1,
+            price: 10.0
+          }
+        ],
+        payments: []
+      },
+      {
+        id: 7,
+        orders: [
+          {
+            product: "Cappuccino",
+            qtd: 2,
+            price: 5.0
+          },
+          {
+            product: "Suco de Laranja",
+            qtd: 1,
+            price: 9.5
+          },
+          {
+            product: "X-Tudo",
+            qtd: 3,
+            price: 19.99
+          },
+          {
+            product: "Batata Frita",
+            qtd: 1,
+            price: 10.0
+          }
+        ],
+        payments: []
       }
     ]
   }),

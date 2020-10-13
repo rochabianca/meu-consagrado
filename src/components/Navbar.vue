@@ -36,13 +36,12 @@ export default {
       isTablePage: false
     };
   },
+  created() {
+    this.isTablePage = this.$route.path.includes("/table/");
+  },
   watch: {
     $route(to) {
-      if (to.path.includes("/table/")) {
-        this.isTablePage = true;
-      } else {
-        this.isTablePage = false;
-      }
+      this.isTablePage = to.path.includes("/table/");
     }
   },
   computed: {

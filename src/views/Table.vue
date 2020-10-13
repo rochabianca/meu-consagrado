@@ -19,7 +19,7 @@
             <button
               @click="showPayBill = true"
               class="button button__secondary"
-              v-if="!isMobile"
+              v-if="!isMobile && total !== '0.00'"
             >
               Adicionar Pagamento
             </button>
@@ -40,11 +40,22 @@
               </tr>
             </tbody>
           </table>
-          <div v-if="!isMobile" class="restautant-table__total">
-            <span class="restautant-table__total__label">Total</span>
-            <span class="restautant-table__total__price">{{
-              total | price
-            }}</span>
+          <div
+            class="restautant-table__total"
+            :class="{ 'restautant-table__total--paid': total === '0.00' }"
+          >
+            <span
+              class="restautant-table__total__label--paid"
+              v-if="total === '0.00'"
+            >
+              A conta está paga!
+            </span>
+            <template v-else>
+              <span class="restautant-table__total__label">Total</span>
+              <span class="restautant-table__total__price">
+                {{ total | price }}
+              </span>
+            </template>
           </div>
         </div>
         <div
@@ -72,6 +83,15 @@
                 </tr>
               </tbody>
             </table>
+            <div
+              class="restautant-table__total"
+              :class="{ 'restautant-table__total--paid': total === '0.00' }"
+            >
+              <span class="restautant-table__total__label">Total Pago</span>
+              <span class="restautant-table__total__price">
+                {{ totalPaid | price }}
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -79,12 +99,34 @@
     <div v-if="error">
       {{ error }}
     </div>
-    <div @click="showPayBill = true" class="restautant-table__total--mobile">
-      <span>Adicionar Pagamento</span>
-      <div class="restautant-table__total--mobile__price">
-        {{ total | price }}
-      </div>
+    <div
+      @click="showPayBill = true"
+      v-if="total !== '0.00'"
+      class="restautant-table__total--mobile"
+      :class="{ 'restautant-table__total--mobile--paid': total === '0.00' }"
+    >
+      <span
+        class="restautant-table__total__label--paid"
+        v-if="total === '0.00'"
+      >
+        A conta está paga!
+      </span>
+      <template v-else>
+        <span>Adicionar Pagamento</span>
+        <div class="restautant-table__total--mobile__price">
+          {{ total | price }}
+        </div>
+      </template>
     </div>
+    <div
+      v-else
+      class="restautant-table__total--mobile restautant-table__total--mobile--paid"
+    >
+      <span class="restautant-table__total__label--paid">
+        A conta está paga!
+      </span>
+    </div>
+
     <pay-bill
       @new-payment="addNewPayment"
       @close="showPayBill = false"
@@ -209,19 +251,29 @@ export default {
     }
   }
   .restautant-table__total {
-    @media (max-width: 768px) {
-      display: none;
-    }
-  }
-  .restautant-table__total {
     background: $dark-blue;
     color: $white;
     padding: 16px 8px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    transition: all ease 0.3s;
+    .restautant-table__total__label--paid {
+      font-weight: bold;
+    }
     .restautant-table__total__price {
       font-weight: bold;
+    }
+    &.restautant-table__total--paid {
+      background: $green;
+    }
+    @media (max-width: 768px) {
+      font-weight: bold;
+      background: none;
+      color: $dark-blue;
+      &.restautant-table__total--paid {
+        background: none;
+      }
     }
   }
   .restautant-table__total--mobile {
@@ -239,6 +291,9 @@ export default {
     cursor: pointer;
     background: $dark-blue;
     color: $white;
+    &.restautant-table__total--mobile--paid {
+      background: $green;
+    }
     .restautant-table__total--mobile__price {
       font-weight: bold;
     }

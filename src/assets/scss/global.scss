@@ -134,3 +134,20 @@
 .slideRight-leave-active {
   animation: slideInRight .5s reverse;
 }
+
+// fade animation
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+.fade-enter-active {
+  animation: fadeIn .5s;
+}
+.fade-leave-active {
+  animation: fadeIn .5s reverse;
+}

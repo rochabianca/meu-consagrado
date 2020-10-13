@@ -1,5 +1,5 @@
 <template>
-  <modal v-if="show" title="Adicionar Pagamento" @close="$emit('close')">
+  <modal :show="show" title="Adicionar Pagamento" @close="$emit('close')">
     <div class="add-payment">
       <div class="add-payment__form">
         <label class="add-payment__label" for="value">

@@ -1,24 +1,29 @@
 <template>
-  <transition :name="animation">
-    <div class="modal">
-      <div class="modal__header">
-        <h2 class="modal__title">
-          {{ title }}
-        </h2>
-        <button @click="$emit('close')" class="modal__close">
-          <img :src="require('@/assets/icons/close.svg')" alt="x" />
-        </button>
-      </div>
+  <div>
+    <transition name="fade">
+      <div @click="$emit('close')" v-if="show" class="modal-shadow"></div>
+    </transition>
+    <transition :name="animation">
+      <div v-if="show" class="modal">
+        <div class="modal__header">
+          <h2 class="modal__title">
+            {{ title }}
+          </h2>
+          <button @click="$emit('close')" class="modal__close">
+            <img :src="require('@/assets/icons/close.svg')" alt="x" />
+          </button>
+        </div>
 
-      <div class="modal__content">
-        <slot></slot>
-      </div>
+        <div class="modal__content">
+          <slot></slot>
+        </div>
 
-      <div class="modal__footer">
-        <slot name="footer"></slot>
+        <div class="modal__footer">
+          <slot name="footer"></slot>
+        </div>
       </div>
-    </div>
-  </transition>
+    </transition>
+  </div>
 </template>
 
 <script>
@@ -27,7 +32,8 @@ import { mapGetters } from "vuex";
 export default {
   name: "Modal",
   props: {
-    title: String
+    title: String,
+    show: Boolean
   },
   computed: {
     ...mapGetters({
@@ -98,5 +104,15 @@ export default {
       left: auto;
     }
   }
+}
+.modal-shadow {
+  background: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  width: 100%;
+  cursor: pointer;
 }
 </style>

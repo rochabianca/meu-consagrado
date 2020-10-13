@@ -7,15 +7,52 @@
   font-weight: bold;
   font-size: 18px;
   transition: all ease 0.3s;
+  cursor: pointer;
+  @media (min-width: 769px) {
+    font-size: 12px;
+  }
   &.button__primary {
     background: $red;
     color: $white;
+  }
+  &.button__secondary {
+    background: $dark-blue;
+    color: white;
   }
   &.button__link {
     color: $dark-blue;
   }
   &:disabled {
     background: $gray;
+  }
+}
+
+.table {
+  margin: 0px;
+  width: 100%;
+  border-collapse: collapse;
+  color: $dark-blue;
+  thead,
+  tbody {
+    text-align: left;
+  }
+  th,
+  td {
+    padding: 16px 0px;
+    vertical-align: middle;
+    border-bottom: 1px solid $gray;
+  }
+  thead {
+    th {
+      padding: 0px 0px 16px 0px;
+      border-bottom: 1px solid $dark-blue;
+    }
+  }
+  .table__align-center {
+    text-align: center;
+  }
+  .table__align-right {
+    text-align: right;
   }
 }
 
@@ -74,4 +111,26 @@
 }
 .slideDown-leave-active {
   animation: slideInDown .3s reverse;
+}
+
+// slide Right animation
+
+@keyframes slideInRight {
+  from {
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+    visibility: visible;
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.slideRight-enter-active {
+  animation: slideInRight .5s;
+}
+.slideRight-leave-active {
+  animation: slideInRight .5s reverse;
 }

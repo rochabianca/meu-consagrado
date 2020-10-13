@@ -9,7 +9,6 @@
 
 <script>
 import Navbar from "@/components/Navbar.vue";
-// import { mobileAndTabletCheck } from "@/store/helpers.js";
 
 export default {
   components: {

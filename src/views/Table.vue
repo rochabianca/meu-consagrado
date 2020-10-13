@@ -1,59 +1,89 @@
 <template>
-  <div class="table">
+  <div class="restautant-table">
     <div v-if="table">
-      <h2 v-if="!isMobile" class="table__title">Mesa {{ table.id }}</h2>
-      <p class="table__available" v-if="table.orders.length === 0">
-        Essa mesa está disponível
-      </p>
-      <div class="table__orders" v-else>
-        <h3 class="table__title table__title--subtitle">Pedidos</h3>
-        <table class="table__table">
-          <thead>
-            <th>Produto</th>
-            <th class="table__table__align-center">Quantidade</th>
-            <th class="table__table__align-right">Preço</th>
-          </thead>
-          <tbody>
-            <tr v-for="order in table.orders" :key="order.product">
-              <td>{{ order.product }}</td>
-              <td class="table__table__align-center">{{ order.qtd }}</td>
-              <td class="table__table__align-right">
-                {{ order.price | price }}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div v-if="table.payments.length > 0" class="table__payments">
-        <h3 class="table__title table__title--subtitle">Pagamentos</h3>
-        <div>
-          <table class="table__table">
+      <h2 v-if="!isMobile" class="restautant-table__title">
+        Mesa {{ table.id }}
+      </h2>
+
+      <div class="restautant-table__container">
+        <p class="restautant-table__available" v-if="table.orders.length === 0">
+          Essa mesa está disponível
+        </p>
+        <div class="restautant-table__orders" v-else>
+          <div class="restautant-table__orders__header">
+            <h3
+              class="restautant-table__title restautant-table__title--subtitle restautant-table__orders__header__title"
+            >
+              Pedidos
+            </h3>
+            <button
+              @click="showPayBill = true"
+              class="button button__secondary"
+              v-if="!isMobile"
+            >
+              Adicionar Pagamento
+            </button>
+          </div>
+          <table class="table">
             <thead>
-              <th>Hora</th>
-              <th class="table__table__align-right">Valor Pago</th>
+              <th>Produto</th>
+              <th class="table__align-center">Quantidade</th>
+              <th class="table__align-right">Preço</th>
             </thead>
             <tbody>
-              <tr
-                v-for="(payment, index) in table.payments"
-                :key="`payments-${index}`"
-              >
-                <td>{{ payment.created_at | date }}</td>
-                <td class="table__table__align-right">
-                  {{ payment.paid | price }}
+              <tr v-for="order in table.orders" :key="order.product">
+                <td>{{ order.product }}</td>
+                <td class="table__align-center">{{ order.qtd }}</td>
+                <td class="table__align-right">
+                  {{ order.price | price }}
                 </td>
               </tr>
             </tbody>
           </table>
+          <div v-if="!isMobile" class="restautant-table__total">
+            <span class="restautant-table__total__label">Total</span>
+            <span class="restautant-table__total__price">{{
+              total | price
+            }}</span>
+          </div>
+        </div>
+        <div
+          v-if="table.payments.length > 0"
+          class="restautant-table__payments"
+        >
+          <h3 class="restautant-table__title restautant-table__title--subtitle">
+            Pagamentos
+          </h3>
+          <div>
+            <table class="table">
+              <thead>
+                <th>Hora</th>
+                <th class="table__align-right">Valor Pago</th>
+              </thead>
+              <tbody>
+                <tr
+                  v-for="(payment, index) in table.payments"
+                  :key="`payments-${index}`"
+                >
+                  <td>{{ payment.created_at | date }}</td>
+                  <td class="table__align-right">
+                    {{ payment.paid | price }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
-      <div class="table__total">Total: {{ total | price }}</div>
     </div>
     <div v-if="error">
       {{ error }}
     </div>
-    <div @click="showPayBill = true" class="table__total--mobile">
+    <div @click="showPayBill = true" class="restautant-table__total--mobile">
       <span>Adicionar Pagamento</span>
-      <div class="table__total--mobile__price">{{ total | price }}</div>
+      <div class="restautant-table__total--mobile__price">
+        {{ total | price }}
+      </div>
     </div>
     <pay-bill
       @new-payment="addNewPayment"
@@ -131,59 +161,70 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.table {
+.restautant-table {
   position: relative;
-  margin-bottom: 86px; // 54px of table__total--mobile and 32px of space
-  .table__title {
-    font-size: 24px;
+  margin-bottom: 86px; // 54px of restautant-table__total--mobile and 32px of space
+  .restautant-table__title {
+    font-size: 32px;
     margin-top: 0px;
-    margin-bottom: 24px;
+    margin-bottom: 32px;
     color: $dark-blue;
     text-transform: uppercase;
-    &.table__title--subtitle {
+    font-weight: lighter;
+
+    &.restautant-table__title--subtitle {
       font-size: 24px;
       margin-bottom: 16px;
-      font-weight: lighter;
       text-transform: capitalize;
     }
   }
-  .table__table {
-    margin: 0px;
-    width: 100%;
-    border-collapse: collapse;
-    color: $dark-blue;
-    thead,
-    tbody {
-      text-align: left;
+  .restautant-table__container {
+    @media (min-width: 1024px) {
+      display: flex;
+      align-items: flex-start;
     }
-    th,
-    td {
-      padding: 16px 0px;
-      vertical-align: middle;
-      border-bottom: 1px solid $gray;
+  }
+  .restautant-table__orders {
+    @media (min-width: 1024px) {
+      width: 50%;
+      padding-right: 48px;
     }
-    thead {
-      th {
-        padding: 0px 0px 16px 0px;
-        border-bottom: 1px solid $dark-blue;
+    .restautant-table__orders__header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 16px;
+      .restautant-table__orders__header__title {
+        margin-bottom: 0px;
+        margin-right: 16px;
       }
     }
-    .table__table__align-center {
-      text-align: center;
-    }
-    .table__table__align-right {
-      text-align: right;
-    }
   }
-  .table__payments {
+  .restautant-table__payments {
     margin-top: 48px;
+    @media (min-width: 1024px) {
+      width: 50%;
+      margin-top: 0px;
+      border-left: 1px dotted $gray;
+      padding-left: 48px;
+    }
   }
-  .table__total {
+  .restautant-table__total {
     @media (max-width: 768px) {
       display: none;
     }
   }
-  .table__total--mobile {
+  .restautant-table__total {
+    background: $dark-blue;
+    color: $white;
+    padding: 16px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .restautant-table__total__price {
+      font-weight: bold;
+    }
+  }
+  .restautant-table__total--mobile {
     @media (min-width: 769px) {
       display: none;
     }
@@ -198,7 +239,7 @@ export default {
     cursor: pointer;
     background: $dark-blue;
     color: $white;
-    .table__total--mobile__price {
+    .restautant-table__total--mobile__price {
       font-weight: bold;
     }
   }

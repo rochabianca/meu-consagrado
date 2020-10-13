@@ -1,5 +1,5 @@
 <template>
-  <transition name="slideUp">
+  <transition :name="animation">
     <div class="modal">
       <div class="modal__header">
         <h2 class="modal__title">
@@ -22,10 +22,21 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   name: "Modal",
   props: {
     title: String
+  },
+  computed: {
+    ...mapGetters({
+      isMobile: "device/isMobile"
+    }),
+    animation() {
+      if (this.isMobile) return "slideUp";
+      return "slideRight";
+    }
   }
 };
 </script>
@@ -41,6 +52,11 @@ export default {
   left: 0;
   right: 0;
   z-index: 3;
+  @media (min-width: 769px) {
+    width: 40%;
+    left: auto;
+    box-shadow: 12px 0px 10px 11px rgba(0, 0, 0, 0.3);
+  }
   .modal__header,
   .modal__footer {
     padding: 16px;
@@ -70,13 +86,17 @@ export default {
     padding: 0px 16px;
   }
   .modal__footer {
-    position: fixed;
+    position: absolute;
     bottom: 0px;
     left: 0px;
     right: 0px;
     width: calc(100% - 32px);
     border-top: 1px solid $gray;
     text-align: right;
+    @media (min-width: 769px) {
+      width: calc(100% - 32px);
+      left: auto;
+    }
   }
 }
 </style>

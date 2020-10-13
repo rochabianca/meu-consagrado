@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1 class="home__title">Mesas Disponíveis</h1>
+    <h1 class="home__title">Mesas</h1>
     <div class="home__container">
       <table-item
         v-for="table in filteredTables"

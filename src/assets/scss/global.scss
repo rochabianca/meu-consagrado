@@ -27,6 +27,48 @@
   }
 }
 
+.title {
+  font-size: 32px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  color: $dark-blue;
+  text-transform: uppercase;
+  font-weight: lighter;
+
+  &.title--subtitle {
+    font-size: 24px;
+    margin-bottom: 16px;
+    text-transform: capitalize;
+  }
+}
+
+.total {
+  background: $dark-blue;
+  color: $white;
+  padding: 16px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all ease 0.3s;
+  .total__label--paid {
+    font-weight: bold;
+  }
+  .total__price {
+    font-weight: bold;
+  }
+  &.total--paid {
+    background: $green;
+  }
+  @media (max-width: 768px) {
+    font-weight: bold;
+    background: none;
+    color: $dark-blue;
+    &.total--paid {
+      background: none;
+    }
+  }
+}
+
 .table {
   margin: 0px;
   width: 100%;

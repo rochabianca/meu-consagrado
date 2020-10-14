@@ -1,11 +1,12 @@
 <template>
-  <div class="home">
+  <div data-cy="home" class="home">
     <h1 class="home__title">Mesas</h1>
     <div class="home__container">
       <loading v-if="loading" />
       <table-item
         v-for="table in filteredTables"
         :key="table.id"
+        :data-cy="`table-${table.id}`"
         :table="table"
       />
     </div>

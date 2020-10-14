@@ -1,5 +1,5 @@
 <template>
-  <div class="restautant-table">
+  <div data-cy="table-page" class="restautant-table">
     <loading v-if="loading" />
     <div v-if="table">
       <div v-if="!isMobile" class="restaurant-table__header">

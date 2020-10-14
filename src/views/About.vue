@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
+  <div data-cy="about-page" class="about">
     <p>
       Criado com <span class="about__heart">♥</span> por
       <a

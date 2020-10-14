@@ -8,6 +8,7 @@
         @click="$emit('show-pay-bill')"
         class="button button__secondary"
         v-if="!isMobile && total !== '0.00'"
+        data-cy="add-payment-button"
       >
         Adicionar Pagamento
       </button>
@@ -33,8 +34,8 @@
         A conta está paga!
       </span>
       <template v-else>
-        <span class="total__label">Total</span>
-        <span class="total__price">
+        <span class="total__label">Conta</span>
+        <span data-cy="total" class="total__price">
           {{ total | price }}
         </span>
       </template>

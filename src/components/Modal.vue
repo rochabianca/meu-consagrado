@@ -4,7 +4,7 @@
       <div @click="$emit('close')" v-if="show" class="modal-shadow"></div>
     </transition>
     <transition :name="animation">
-      <div v-if="show" class="modal">
+      <div data-cy="payment-modal" v-if="show" class="modal">
         <div class="modal__header">
           <h2 class="modal__title">
             {{ title }}

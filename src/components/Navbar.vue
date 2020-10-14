@@ -15,7 +15,9 @@
           :key="index"
           class="navbar__item"
         >
-          <router-link :to="value">{{ label }}</router-link>
+          <router-link :data-cy="`navbar-link-${label}`" :to="value">{{
+            label
+          }}</router-link>
         </li>
       </ul>
     </nav>

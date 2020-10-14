@@ -1,5 +1,5 @@
 <template>
-  <div class="table-payments">
+  <div data-cy="payments" class="table-payments">
     <h3 class="title title--subtitle">
       Pagamentos
     </h3>
@@ -12,7 +12,7 @@
         <tbody>
           <tr v-for="(payment, index) in payments" :key="`payments-${index}`">
             <td>{{ payment.created_at | date }}</td>
-            <td class="table__align-right">
+            <td data-cy="payments-payment" class="table__align-right">
               {{ payment.paid | price }}
             </td>
           </tr>

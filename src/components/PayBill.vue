@@ -10,6 +10,7 @@
           <input
             class="add-payment__input"
             id="value"
+            data-cy="payment-input"
             v-model="paymentData.paid"
             type="number"
           />
@@ -30,6 +31,7 @@
         :disabled="disablePayButton"
         class="button button__primary"
         @click="createPayment"
+        data-cy="payment-modal-primary-button"
       >
         Pagar
       </button>

@@ -1,34 +1,16 @@
-# meu-consagrado
+# Meu Consagrado
 
-## Project setup
+Meu consagrado é um webapp produzido para ajudar na divisão de contas, ao mostrar um resumo da conta, seus pagamentos parciais e quanto falta para completar a conta.
+
+## Instalação e Uso
 ```
 npm install
 ```
-
-### Compiles and hot-reloads for development
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
+### Rodando Testes e2e
 ```
 npm run test
 ```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Run your end-to-end tests
-```
-npm run test:e2e
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

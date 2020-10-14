@@ -69,6 +69,29 @@
   }
 }
 
+.total--mobile {
+  @media (min-width: 769px) {
+    display: none;
+  }
+  position: fixed;
+  width: calc(100% - 64px);
+  left: 0;
+  right: 0;
+  bottom: 0px;
+  padding: 16px 32px;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  background: $dark-blue;
+  color: $white;
+  &.total--mobile--paid {
+    background: $green;
+  }
+  .total--mobile__price {
+    font-weight: bold;
+  }
+}
+
 .table {
   margin: 0px;
   width: 100%;

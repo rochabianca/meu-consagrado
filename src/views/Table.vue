@@ -27,7 +27,7 @@
         />
       </div>
     </div>
-    <div v-if="error">
+    <div data-cy="table-error-message" v-if="error">
       {{ error }}
     </div>
     <div

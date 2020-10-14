@@ -22,14 +22,17 @@ class Table {
   typeValue(value) {
     cy.get('[data-cy="payment-input"]').type(value);
   }
+  clickOnPay() {
+    cy.get('[data-cy="payment-modal-primary-button"]').click();
+  }
   addPayment(value) {
     this.getTotalValue();
     const valueFiltered = value.toFixed(2).replace(".", ",");
     this.openModal();
     this.typeValue(value);
-    cy.get('[data-cy="payment-modal-primary-button"]').click();
+    this.clickOnPay();
     cy.get("[data-cy=payments]").should("be.visible");
-    cy.get(":nth-child(3) > [data-cy=payments-payment]").contains(
+    cy.get(":last-child > [data-cy=payments-payment]").contains(
       `R$ ${valueFiltered}`
     );
     // checks total

@@ -11,6 +11,11 @@ npm run serve
 ```
 
 ### Rodando Testes e2e
+No Cypress
 ```
 npm run test
+```
+No terminal
+```
+npm run test:run
 ```

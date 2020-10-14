@@ -27,3 +27,4 @@ pnpm-debug.log*
 .firebase
 .github
 .firebaserc
+tests/e2e/cypress/videos

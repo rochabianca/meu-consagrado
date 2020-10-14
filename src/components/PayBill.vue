@@ -16,7 +16,11 @@
           />
         </div>
         <transition name="slideDown">
-          <span class="add-payment__validation-message" v-if="error">
+          <span
+            data-cy="error-message"
+            class="add-payment__validation-message"
+            v-if="error"
+          >
             {{ error }}
           </span>
         </transition>

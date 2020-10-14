@@ -1,11 +1,7 @@
 <template>
   <div class="navbar">
     <router-link v-if="isMobile && isTablePage" to="/" class="navbar__table">
-      <img
-        class="navbar__go-back"
-        :src="require('@/assets/icons/arrow-left.svg')"
-        alt="Voltar"
-      />
+      <arrow-left class="navbar__go-back" />
       <span>{{ routerName }}</span>
     </router-link>
     <router-link v-else to="/">
@@ -27,10 +23,14 @@
 </template>
 
 <script>
+import ArrowLeft from "@/assets/icons/ArrowLeft.vue";
 import { mapGetters } from "vuex";
 
 export default {
   name: "Navbar",
+  components: {
+    ArrowLeft
+  },
   data() {
     return {
       isTablePage: false

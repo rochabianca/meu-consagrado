@@ -1,10 +1,12 @@
 <template>
   <div class="restautant-table">
     <div v-if="table">
-      <h2 v-if="!isMobile" class="restautant-table__title">
-        Mesa {{ table.id }}
-      </h2>
-
+      <div v-if="!isMobile" class="restaurant-table__header">
+        <router-link to="/">
+          <arrow-left class="restaurant-table__header__arrow" color="#9292a0" />
+        </router-link>
+        <h2 class="restautant-table__title">Mesa {{ table.id }}</h2>
+      </div>
       <div class="restautant-table__container">
         <p class="restautant-table__available" v-if="table.orders.length === 0">
           Essa mesa está disponível
@@ -138,12 +140,14 @@
 
 <script>
 import PayBill from "@/components/PayBill.vue";
+import ArrowLeft from "@/assets/icons/ArrowLeft.vue";
 import { mapGetters } from "vuex";
 
 export default {
   name: "Table",
   components: {
-    PayBill
+    PayBill,
+    ArrowLeft
   },
   data() {
     return {
@@ -209,7 +213,7 @@ export default {
   .restautant-table__title {
     font-size: 32px;
     margin-top: 0px;
-    margin-bottom: 32px;
+    margin-bottom: 0px;
     color: $dark-blue;
     text-transform: uppercase;
     font-weight: lighter;
@@ -219,6 +223,15 @@ export default {
       margin-bottom: 16px;
       text-transform: capitalize;
     }
+  }
+  .restaurant-table__header {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 32px;
+  }
+  .restaurant-table__header__arrow {
+    width: 12px;
+    margin-right: 8px;
   }
   .restautant-table__container {
     @media (min-width: 1024px) {

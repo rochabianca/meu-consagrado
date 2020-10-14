@@ -1,5 +1,6 @@
 <template>
   <div class="restautant-table">
+    <loading v-if="loading" />
     <div v-if="table">
       <div v-if="!isMobile" class="restaurant-table__header">
         <router-link to="/">
@@ -77,6 +78,7 @@ export default {
   },
   data() {
     return {
+      loading: true,
       table: null,
       error: null,
       showPayBill: false
@@ -92,9 +94,11 @@ export default {
         .dispatch("getTableInfo", { id: Number(id) })
         .then(data => {
           this.table = data;
+          this.loading = false;
         })
         .catch(e => {
           this.error = e.message;
+          this.loading = false;
         });
     },
     addNewPayment(payment) {

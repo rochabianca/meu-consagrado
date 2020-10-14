@@ -2,6 +2,7 @@
   <div class="home">
     <h1 class="home__title">Mesas</h1>
     <div class="home__container">
+      <loading v-if="loading" />
       <table-item
         v-for="table in filteredTables"
         :key="table.id"
@@ -20,7 +21,8 @@ export default {
   },
   data() {
     return {
-      tables: []
+      tables: [],
+      loading: true
     };
   },
   created() {
@@ -29,6 +31,7 @@ export default {
   methods: {
     getTables() {
       this.tables = this.$store.getters.getTables;
+      this.loading = false;
     }
   },
   computed: {

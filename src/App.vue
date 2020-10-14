@@ -14,12 +14,7 @@ export default {
   components: {
     Navbar
   },
-  beforeRouteUpdate() {
-    console.log("beforeRouteUpdate");
-  },
   mounted() {
-    console.log("montou");
-
     const resources = container => {
       this.$store.commit("device/calc", {
         width: container.innerWidth,

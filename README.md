@@ -11,6 +11,8 @@ npm run serve
 ```
 
 ### Rodando Testes e2e
+*Importante*: Você precisa estar com o servidor rodando para rodar os testes
+
 No Cypress
 ```
 npm run test

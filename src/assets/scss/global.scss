@@ -194,10 +194,10 @@
 }
 
 .slideRight-enter-active {
-  animation: slideInRight .5s;
+  animation: slideInRight .3s;
 }
 .slideRight-leave-active {
-  animation: slideInRight .5s reverse;
+  animation: slideInRight .3s reverse;
 }
 
 // fade animation
@@ -211,8 +211,8 @@
   }
 }
 .fade-enter-active {
-  animation: fadeIn .5s;
+  animation: fadeIn .3s;
 }
 .fade-leave-active {
-  animation: fadeIn .5s reverse;
+  animation: fadeIn .3s reverse;
 }

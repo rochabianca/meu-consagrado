@@ -11,13 +11,15 @@ describe("Table Tests", () => {
   });
   it("should not show the payments page if there is no payments", () => {
     table.visit(3);
-    cy.get("[data-cy=payments]").should("not.be.visible");
+    cy.get("[data-cy=payments]").should("not.exist");
   });
   it("should be able to add a payment", () => {
     table.visit(3);
     table.addPayment(45.5);
   });
   it("should not be able to add a payment greater then the total", () => {
+    table.visit(3);
+    table.addPayment(45.5);
     table.openModal();
     table.typeValue(1000);
     cy.get('[data-cy="error-message"]').should("be.visible");

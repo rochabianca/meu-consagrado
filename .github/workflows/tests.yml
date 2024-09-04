@@ -23,6 +23,7 @@ jobs:
           start: npm run serve
           config: baseUrl="http://localhost:8080/"
           wait-on: "http://localhost:8080/"
+          install: false
           working-directory: tests/e2e
           spec: tests/e2e/cypress/e2e/**
           config-file: tests/e2e/cypress.config.js

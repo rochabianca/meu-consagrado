@@ -25,7 +25,6 @@ pnpm-debug.log*
 *.sln
 *.sw?
 .firebase
-.github
 .firebaserc
 tests/e2e/cypress/videos
 tests/e2e/coverage

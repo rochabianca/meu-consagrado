@@ -29,13 +29,13 @@ jobs:
           # config-file: tests/e2e/cypress.config.js
 
       - name: Set code coverage commit status 📫
-        run: npx -p check-code-coverage set-gh-status --from /home/runner/work/meu-consagrado/tests/e2e/coverage/coverage-summary.json
+        run: npx -p check-code-coverage set-gh-status --from /home/runner/work/meu-consagrado/meu-consagrado/tests/e2e/coverage/coverage-summary.json
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_SHA: ${{ github.event.after }}
 
       - name: Ensure coverage has not dropped 📈
-        run: npx -p check-code-coverage set-gh-status --from /home/runner/work/meu-consagrado/tests/e2e/coverage/coverage-summary.json --check-against-readme
+        run: npx -p check-code-coverage set-gh-status --from /home/runner/work/meu-consagrado/meu-consagrado/tests/e2e/coverage/coverage-summary.json --check-against-readme
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_SHA: ${{ github.event.after }}

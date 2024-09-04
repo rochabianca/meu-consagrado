@@ -25,8 +25,8 @@ jobs:
           wait-on: "http://localhost:8080/"
           install: false
           working-directory: tests/e2e
-          spec: tests/e2e/cypress/e2e/**
-          config-file: tests/e2e/cypress.config.js
+          # spec: tests/e2e/cypress/e2e/**
+          # config-file: tests/e2e/cypress.config.js
 
       - name: Set code coverage commit status 📫
         run: npx -p check-code-coverage --from tests/e2e/coverage/coverage-summary.json set-gh-status

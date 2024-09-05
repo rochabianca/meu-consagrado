@@ -1,14 +1,13 @@
 const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
-  fixturesFolder: "tests/e2e/fixtures",
-  screenshotsFolder: "tests/e2e/screenshots",
-  videosFolder: "tests/e2e/videos",
-
   e2e: {
     setupNodeEvents(on, config) {
+      require('@cypress/code-coverage/task')(on, config)
       // implement node event listeners here
+      return config
     },
-    baseUrl: 'http://localhost:8080/'
+    baseUrl: 'http://localhost:8080/',
+    experimentalRunAllSpecs: true,
   },
 });

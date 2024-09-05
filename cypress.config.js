@@ -1,13 +1,14 @@
 const { defineConfig } = require("cypress");
-
+const codeCoverage = require("@cypress/code-coverage/task");
 module.exports = defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
-      require('@cypress/code-coverage/task')(on, config)
+      // @ts-ignore
+      codeCoverage(on, config);
       // implement node event listeners here
-      return config
+      return config;
     },
-    baseUrl: 'http://localhost:8080/',
-    experimentalRunAllSpecs: true,
-  },
+    baseUrl: "http://localhost:8080/",
+    experimentalRunAllSpecs: true
+  }
 });

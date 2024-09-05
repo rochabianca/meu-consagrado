@@ -1,4 +1,4 @@
-# Meu Consagrado
+# Meu Consagrado ![check-code-coverage](https://img.shields.io/badge/code--coverage-88.52%25-green)
 
 Meu consagrado é um webapp produzido para ajudar na divisão de contas, ao mostrar um resumo da conta, seus pagamentos parciais e quanto falta para completar a conta.
 

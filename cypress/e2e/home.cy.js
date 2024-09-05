@@ -6,6 +6,7 @@ describe("Home Tests", () => {
     home.goHome();
   });
   it("should be able to go to about page", () => {
+    home.goHome();
     home.clickOnNavbarLink("navbar-link-Sobre");
     cy.get("[data-cy=about-page]").should("be.visible");
   });

@@ -1,0 +1,43 @@
+name: Cypress Tests
+
+on: [pull_request]
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: "14"
+
+      - name: Install
+        run: npm install
+
+      - name: Cypress tests 🧪
+        uses: cypress-io/github-action@v4.1.0
+
+        with:
+          start: npm run serve
+          config: baseUrl="http://localhost:8080/"
+          wait-on: "http://localhost:8080/"
+          install: false
+
+      - name: Set code coverage commit status 📫
+        run: npx -p check-code-coverage set-gh-status
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_SHA: ${{ github.event.after }}
+
+      - name: Ensure coverage has not dropped 📈
+        run: npx -p check-code-coverage set-gh-status --check-against-readme
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_SHA: ${{ github.event.after }}
+
+      - name: Run codacy-coverage-reporter 📑
+        uses: codacy/codacy-coverage-reporter-action@v1.3.0
+        with:
+          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
